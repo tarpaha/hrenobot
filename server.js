@@ -9,7 +9,7 @@ const parser = bodyParser.urlencoded({ extended: false });
 
 app.post('/', parser, function(req, res) {
     res.send({
-        answer: req.body.text ? answers.get(req.body.text) :  null
+        answer: answers.get(req.body.text)
     });
 });
 
