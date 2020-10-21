@@ -1,5 +1,5 @@
 'use strict';
 
-module.exports.get = function(req, res) {
-    res.send('You got your answer');
+module.exports.get = function(text) {
+    return 'hreno ' + text;
 }
