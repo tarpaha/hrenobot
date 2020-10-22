@@ -1,18 +1,20 @@
 'use strict';
 
-const express = require('express');
+const port = 8000;
+
+const fastify = require('fastify')({ logger: false });
 const answers = require('./answers');
 
-const app = express();
-app.use(express.json());
-
-app.post('/', function(req, res) {
-    res.send({
-        answer: answers.get(req.body.text)
-    });
+fastify.post('/', async (req, res) => {
+    return { answer: await answers.get(req.body.text) }
 });
 
-const port = 8000;
-app.listen(port, () => {
-    console.log('Server started on: ' + port);
-});
+const start = async () => {
+    try {
+        await fastify.listen(port);
+    } catch (err) {
+        process.exit(1);
+    }
+}
+
+start();
