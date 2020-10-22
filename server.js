@@ -1,13 +1,12 @@
 'use strict';
 
-const express    = require('express');
-const bodyParser = require('body-parser');
+const express = require('express');
 const answers = require('./answers');
 
 const app = express();
-const parser = bodyParser.urlencoded({ extended: false });
+app.use(express.json());
 
-app.post('/', parser, function(req, res) {
+app.post('/', function(req, res) {
     res.send({
         answer: answers.get(req.body.text)
     });
