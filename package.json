@@ -7,7 +7,10 @@
     "start": "nodemon server.js"
   },
   "author": "",
-  "repository": "https://github.com/tarpaha/hrenobot-rest-api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tarpaha/hrenobot-rest-api.git"
+  },
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
