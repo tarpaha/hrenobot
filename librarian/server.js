@@ -1,9 +1,11 @@
 'use strict';
 
-const fastify = require('fastify')({ logger: false });
-const dictionary = require('./dictionary');
+const debug = process.env.NODE_ENV !== 'production';
 
 const port = process.env.PORT || 3000;
+
+const fastify = require('fastify')({ logger: debug });
+const dictionary = require('./dictionary');
 
 const config = require('dotenv').config();
 if(config.error)
@@ -29,7 +31,6 @@ const start = async () => {
     try {
         await dictionary.update();
         await fastify.listen(port, '0.0.0.0');
-        console.log(`listening on port ${fastify.server.address().port}`);
     } catch (err) {
         console.log(err);
         process.exit(1);

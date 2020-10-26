@@ -4,6 +4,7 @@ services:
   librarian:
     build: ./librarian
     environment:
+      - NODE_ENV=${NODE_ENV}
       - PORT=${LIBRARIAN_PORT}
     ports:
       - "${LIBRARIAN_PORT}:${LIBRARIAN_PORT}"
@@ -15,6 +16,7 @@ services:
     depends_on:
       - librarian
     environment:
+      - NODE_ENV=${NODE_ENV}
       - PORT=${RESPONDENT_PORT}
       - LIBRARIAN_ADDRESS=librarian:${LIBRARIAN_PORT}
     ports:
