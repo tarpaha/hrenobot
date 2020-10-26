@@ -13,6 +13,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "fastify": "^3.7.0"
   },
   "devDependencies": {
