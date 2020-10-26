@@ -4,6 +4,10 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 var Dictionary;
 module.exports.getRecords = () => { return Dictionary; }
+module.exports.getReaction = (text) => {
+    const foundElement = Dictionary.find(el => el.text === text);
+    return { reaction: foundElement ? foundElement.reaction : null };
+}
 module.exports.update = async () => {
     const spreadsheet = await loadSpreadsheet(process.env.SPREADSHEET_ID, process.env.API_KEY);
     const rows = await loadWorksheetRows(spreadsheet, 0);

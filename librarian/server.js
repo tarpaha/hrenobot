@@ -12,6 +12,10 @@ if(config.error)
     process.exit(1);
 }
 
+fastify.get('/get', async (req, res) => {
+    return dictionary.getReaction(req.query.text);
+});
+
 fastify.get('/records', async (req, res) => {
     return dictionary.getRecords();
 });
