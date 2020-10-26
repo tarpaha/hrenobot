@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  librarian:
+    build: ./librarian
+    environment:
+      - PORT=${LIBRARIAN_PORT}
+    ports:
+      - "${LIBRARIAN_PORT}:${LIBRARIAN_PORT}"
+    networks:
+      - backend
+    
+networks:
+  backend:
