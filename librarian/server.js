@@ -29,6 +29,7 @@ const start = async () => {
     try {
         await dictionary.update();
         await fastify.listen(port, '0.0.0.0');
+        console.log(`listening on port ${fastify.server.address().port}`);
     } catch (err) {
         console.log(err);
         process.exit(1);
