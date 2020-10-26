@@ -1,6 +1,9 @@
 'use strict';
 
+const fastify = require('fastify')({ logger: false });
 const { GoogleSpreadsheet } = require('google-spreadsheet');
+
+const port = 8000;
 
 var config = require('dotenv').config();
 if(config.error)
@@ -24,17 +27,31 @@ const loadWorksheetRows = async (spreadsheet, worksheetIndex) => {
     return rows;
 }
 
-const loadDictionary = async () => {
+const updateDictionary = async () => {
     const spreadsheet = await loadSpreadsheet(process.env.SPREADSHEET_ID, process.env.API_KEY);
-    var rows = await loadWorksheetRows(spreadsheet, 0);
-    return rows.map(row => {
+    const rows = await loadWorksheetRows(spreadsheet, 0);
+    Dictionary = rows.map(row => {
         return { text: row.text, reaction: row.reaction };
     });
 }
 
+fastify.get('/records', async (req, res) => {
+    return Dictionary;
+});
+
+fastify.get('/update', async (req, res) => {
+    await updateDictionary();
+    return { records: Dictionary.length };
+});
+
 const start = async () => {
-    Dictionary = await loadDictionary();
-    console.log(Dictionary);
+    try {
+        await updateDictionary();
+        await fastify.listen(port, '0.0.0.0');
+    } catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
 }
 
 start();
