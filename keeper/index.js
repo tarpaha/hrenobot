@@ -1,7 +1,13 @@
 'use strict';
 
 const { GoogleSpreadsheet } = require('google-spreadsheet');
-require('dotenv').config();
+
+var config = require('dotenv').config();
+if(config.error)
+{
+    console.log(`Error loading env variables: ${config.error}`);
+    process.exit(1);
+}
 
 var Dictionary;
 
