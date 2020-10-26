@@ -6,8 +6,8 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV}
       - PORT=${LIBRARIAN_PORT}
-    ports:
-      - "${LIBRARIAN_PORT}:${LIBRARIAN_PORT}"
+    expose:
+      - "${LIBRARIAN_PORT}"
     networks:
       - backend
 
