@@ -3,7 +3,7 @@
 const fastify = require('fastify')({ logger: false });
 const dictionary = require('./dictionary');
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 const config = require('dotenv').config();
 if(config.error)
