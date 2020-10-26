@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "google-spreadsheet": "^3.0.13"
+    "google-spreadsheet": "^3.0.13",
+    "fastify": "^3.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
