@@ -9,6 +9,18 @@ services:
       - "${LIBRARIAN_PORT}:${LIBRARIAN_PORT}"
     networks:
       - backend
-    
+
+  respondent:
+    build: ./respondent
+    depends_on:
+      - librarian
+    environment:
+      - PORT=${RESPONDENT_PORT}
+      - LIBRARIAN_ADDRESS=librarian:${LIBRARIAN_PORT}
+    ports:
+      - "${RESPONDENT_PORT}:${RESPONDENT_PORT}"
+    networks:
+      - backend
+          
 networks:
   backend:
