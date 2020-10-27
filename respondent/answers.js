@@ -1,12 +1,16 @@
 'use strict';
 
-module.exports.get = async (text) => {
-    return text && (typeof text === 'string')
-        ? await getLastWord(text)
-        : null;
+const axios = require('axios');
+
+module.exports.get = async (librarianAddress, text) => {
+    if (!text || (typeof text !== 'string'))
+        return null;
+    const response = await axios.get(
+        `http://${librarianAddress}/get`, { params: { text: getLastWord(text) } });
+    return response.data.reaction;
 }
 
-async function getLastWord(text) {
+function getLastWord(text) {
     var words = text.match(/([\p{L}-]+)/ug);
     return words ? words.pop() : null;
 }

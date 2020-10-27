@@ -3,20 +3,20 @@
 const debug = process.env.NODE_ENV !== 'production';
 
 const port = process.env.PORT || 8000;
-const librarian_address = process.env.LIBRARIAN_ADDRESS || 'localhost:3000';
+const librarianAddress = process.env.LIBRARIAN_ADDRESS || 'localhost:3000';
 
 const fastify = require('fastify')({ logger: debug });
 const axios = require('axios');
 
 const answers = require('./answers');
 
-fastify.get('/update', async (req, res) => {
-    const response = await axios.get(`http://${librarian_address}/update`);
-    return response.data;
+fastify.post('/', async (req, res) => {
+    return { answer: await answers.get(librarianAddress, req.body.text) }
 });
 
-fastify.post('/', async (req, res) => {
-    return { answer: await answers.get(req.body.text) }
+fastify.get('/update', async (req, res) => {
+    const response = await axios.get(`http://${librarianAddress}/update`);
+    return response.data;
 });
 
 const start = async () => {
