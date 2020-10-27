@@ -10,7 +10,7 @@ services:
     expose:
       - "${LIBRARIAN_PORT}"
     networks:
-      - backend
+      - internal
 
   respondent:
     build: ./respondent
@@ -21,10 +21,23 @@ services:
       - PORT=${RESPONDENT_PORT}
       - LIBRARIAN_ADDRESS=librarian:${LIBRARIAN_PORT}
       - PYTHONUNBUFFERED=1
-    ports:
-      - "${RESPONDENT_PORT}:${RESPONDENT_PORT}"
+    expose:
+      - "${RESPONDENT_PORT}"
     networks:
-      - backend
+      - bot
+      - internal
+
+  bot:
+    build: ./bot
+    depends_on:
+      - respondent
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - RESPONDENT_ADDRESS=respondent:${RESPONDENT_PORT}
+      - PYTHONUNBUFFERED=1
+    networks:
+      - bot
           
 networks:
-  backend:
+  bot:
+  internal:
