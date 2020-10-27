@@ -21,11 +21,21 @@ const bot = new telegramBot(token, {polling: true});
 bot.onText(/\/update/, (msg) => {
     axios.get(`http://${respondentAddress}/update`).then((response) => {
         bot.sendMessage(msg.chat.id, `Updated, records: ${response.data.records}`);
+    }).catch((error) => {
+        console.log(error);
+        bot.sendMessage(msg.chat.id, 'Error during update');
     });    
 });
 
 bot.on('message', (msg) => {
     if(msg.text.toString().toLowerCase() === '/update')
         return;
-    bot.sendMessage(msg.chat.id, 'Pong: ' + msg.text);
+    axios.post(`http://${respondentAddress}`, {
+        text: msg.text
+    }).then((response) => {
+        if(response.data.answer)
+            bot.sendMessage(msg.chat.id, response.data.answer);
+    }).catch((error) => {
+        console.log(error);
+    });
 });
