@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a Telegram bot written on Node.JS with microservices. It listen for user messages and somehow reacts on it.
+This is a Telegram bot written on Node.JS with microservices. It waits for user messages and somehow reacts to them.
 
 ## Microservices
 
