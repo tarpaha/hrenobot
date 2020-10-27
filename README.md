@@ -47,14 +47,14 @@ RestAPI service. Receives full chat message from Bot. Decides from were and how 
   * Receives data in JSON `{ text: _text_ }`
   * Get last word from `_text_`
   * Send it with `GET /get` to *Librarian*
-  * Waits for the response and returns it upper
+  * Waits for the response, extract `reaction` and returns it upper as `answer`
 * `GET /update`
   * Sends `GET /update` to the *Librarian*
   * Waits for the response and returns it upper
 
 ### Librarian
 
-Returns reaction for passed word. Uses Google Spreadsheets as storage for `word -> reaction` pairs.
+RestAPI service. Returns reaction for passed word. Uses Google Spreadsheets as storage for `word -> reaction` pairs.
 
 #### API
 
@@ -62,7 +62,7 @@ Returns reaction for passed word. Uses Google Spreadsheets as storage for `word 
   * Looks for `_text_` key in dictionary
   * Returns `{ reaction: _reaction_ }` if found, `{ reaction: null }` if not.
 * `GET /update`
-  * Updates internal dictionary with data from Google Spreadheet, returns number of stored records in form `{ records: _records_count_ }`. This takes about second and also limited by Google API (100 request per minute or something).
+  * Updates internal dictionary with data from Google Spreadheet, returns number of stored records in form `{ records: _records_count_ }`. This request takes about a second and also limited by Google API (100 requests per minute or something).
 
 #### Requirements
 
