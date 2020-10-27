@@ -21,7 +21,7 @@ Telegram bot itself. Uses [node-telegram-bot-api](https://github.com/yagop/node-
 For any new message in chat:
 
 * Get text from message
-* `POST /` `{ text: _chat_message_text_ }` it to **Respondent** microservice
+* `POST /` `{ text: _chat_message_text_ }` to **Respondent** microservice
 * Wait for the response
 * If response contains non-null `answer` field then take it and print in Telegram chat
 
