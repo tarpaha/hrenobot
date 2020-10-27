@@ -1,17 +1,17 @@
 {
-  "name": "hrenobot-rest-api",
+  "name": "hrenobot-respondent",
   "version": "1.0.0",
-  "description": "Simple REST API used by hrenobot",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
   "author": "",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tarpaha/hrenobot-rest-api.git"
+    "url": "https://github.com/tarpaha/hrenobot.git"
   },
-  "license": "ISC",
   "dependencies": {
     "axios": "^0.21.0",
     "fastify": "^3.7.0"
