@@ -10,13 +10,18 @@ if(config.error)
     process.exit(1);
 }
 
+const respondentAddress = process.env.RESPONDENT_ADDRESS || 'localhost:8000';
+
 const telegramBot = require('node-telegram-bot-api');
+const axios = require('axios');
 const token = process.env.TELEGRAM_BOT_TOKEN;
 
 const bot = new telegramBot(token, {polling: true});
 
 bot.onText(/\/update/, (msg) => {
-    bot.sendMessage(msg.chat.id,"Updating");
+    axios.get(`http://${respondentAddress}/update`).then((response) => {
+        bot.sendMessage(msg.chat.id, `Updated, records: ${response.data.records}`);
+    });    
 });
 
 bot.on('message', (msg) => {
