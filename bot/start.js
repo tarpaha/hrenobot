@@ -34,7 +34,7 @@ bot.on('message', (msg) => {
         text: msg.text
     }).then((response) => {
         if(response.data.answer)
-            bot.sendMessage(msg.chat.id, response.data.answer);
+            bot.sendMessage(msg.chat.id, response.data.answer, { reply_to_message_id: msg.message_id});
     }).catch((error) => {
         console.log(error);
     });
